@@ -17,7 +17,18 @@ let package = Package(
         .target(
             name: "Amplitude",
             path: "Sources/Amplitude",
-            exclude: ["AppledocSettings.plist"],
+            exclude: {
+              var exclude: [String] = ["AppledocSettings.plist"]
+              if !canImport(UIKit) {
+                exclude.append("Sources/Amplitude/AMPBubbleView.h")
+                exclude.append("Sources/Amplitude/AMPBubbleView.m")
+                exclude.append("Sources/Amplitude/AMPEventExplorer.h")
+                exclude.append("Sources/Amplitude/AMPEventExplorer.m")
+                exclude.append("Sources/Amplitude/AMPInfoViewController.h")
+                exclude.append("Sources/Amplitude/AMPInfoViewController.m")
+              }
+              return exclude
+            }(),
             resources: [
                 .process("Resources/AMPBubbleView.xib"),
                 .process("Resources/AMPInfoViewController.xib"),
