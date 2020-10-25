@@ -19,8 +19,8 @@ let package = Package(
             path: "Sources/Amplitude",
             exclude: ["AppledocSettings.plist"],
             resources: [
-                .process("Resources/AMPBubbleView.xib"),
-                .process("Resources/AMPInfoViewController.xib"),
+//                .process("Resources/AMPBubbleView.xib"),
+//               .process("Resources/AMPInfoViewController.xib"),
                 .process("Resources/cancel.png"),
                 .process("Resources/cancel@2x.png"),
                 .process("Resources/cancel@3x.png"),
