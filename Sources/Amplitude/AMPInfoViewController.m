@@ -66,15 +66,19 @@
 }
 
 - (IBAction)deviceIdCopyTapped:(id)sender {
+#if !os(tvOS)
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.deviceIdLabel.text;
+#endif
     
     [self showAndDismissCopiedLabel];
 }
 
 - (IBAction)userIdCopyTapped:(id)sender {
+#if !os(tvOS)
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.userIdLabel.text;
+#endif
     
     [self showAndDismissCopiedLabel];
 }
