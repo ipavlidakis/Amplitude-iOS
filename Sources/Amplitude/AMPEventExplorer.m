@@ -46,60 +46,60 @@
 }
 
 - (void)showBubbleView {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        CGFloat screenHeight = screenRect.size.height;
-        NSInteger bottomOffset = [AMPUtils barBottomOffset];
-            
-        self.bubbleView = [[AMPBubbleView alloc] initWithFrame:CGRectMake(screenWidth - 50,
-                                                                          screenHeight - 50 - bottomOffset,
-                                                                          35,
-                                                                          35)];
-        
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^{
-            [[AMPUtils getKeyWindow] addSubview:self.bubbleView];
-        });
-         
-        [self.bubbleView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showInfoView)]];
-        [self.bubbleView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(bubbleViewDragged:)]];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        CGRect screenRect = [[UIScreen mainScreen] bounds];
+//        CGFloat screenWidth = screenRect.size.width;
+//        CGFloat screenHeight = screenRect.size.height;
+//        NSInteger bottomOffset = [AMPUtils barBottomOffset];
+//
+//        self.bubbleView = [[AMPBubbleView alloc] initWithFrame:CGRectMake(screenWidth - 50,
+//                                                                          screenHeight - 50 - bottomOffset,
+//                                                                          35,
+//                                                                          35)];
+//
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//            [[AMPUtils getKeyWindow] addSubview:self.bubbleView];
+//        });
+//
+//        [self.bubbleView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showInfoView)]];
+//        [self.bubbleView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(bubbleViewDragged:)]];
+//    });
 }
 
 - (void)showInfoView {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bubbleView != nil) {
-            UIViewController *rootViewController = [[AMPUtils getKeyWindow] rootViewController];
-            
-            NSBundle *bundle = [NSBundle bundleForClass:[AMPInfoViewController class]];
-            AMPInfoViewController *infoVC = [[AMPInfoViewController alloc] initWithNibName:@"AMPInfoViewController" bundle:bundle];
-            infoVC.instanceName = self.instanceName;
-            
-            [infoVC setModalPresentationStyle:UIModalPresentationFullScreen];
-            [rootViewController presentViewController:infoVC animated:YES completion:nil];
-        }
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (self.bubbleView != nil) {
+//            UIViewController *rootViewController = [[AMPUtils getKeyWindow] rootViewController];
+//
+//            NSBundle *bundle = [NSBundle bundleForClass:[AMPInfoViewController class]];
+//            AMPInfoViewController *infoVC = [[AMPInfoViewController alloc] initWithNibName:@"AMPInfoViewController" bundle:bundle];
+//            infoVC.instanceName = self.instanceName;
+//
+//            [infoVC setModalPresentationStyle:UIModalPresentationFullScreen];
+//            [rootViewController presentViewController:infoVC animated:YES completion:nil];
+//        }
+//    });
 }
 
 - (void)bubbleViewDragged:(UIPanGestureRecognizer *)sender {
-    CGPoint translation = [sender translationInView:self.bubbleView];
-    
-    CGFloat statusBarHeight = [AMPUtils statusBarHeight];
-    NSInteger bottomOffset = [AMPUtils barBottomOffset];
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
-    CGFloat newY = MIN(self.bubbleView.center.y + translation.y, screenHeight - bottomOffset);
-    newY = MAX(statusBarHeight + (CGRectGetHeight(self.bubbleView.bounds) / 2), newY);
-    
-    CGFloat newX = MIN(self.bubbleView.center.x + translation.x, screenWidth);
-    newX = MAX((CGRectGetWidth(self.bubbleView.bounds) / 2), newX);
-    
-    self.bubbleView.center = CGPointMake(newX, newY);
-    [sender setTranslation:CGPointZero inView:self.bubbleView];
+//    CGPoint translation = [sender translationInView:self.bubbleView];
+//
+//    CGFloat statusBarHeight = [AMPUtils statusBarHeight];
+//    NSInteger bottomOffset = [AMPUtils barBottomOffset];
+//
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    CGFloat screenHeight = screenRect.size.height;
+//
+//    CGFloat newY = MIN(self.bubbleView.center.y + translation.y, screenHeight - bottomOffset);
+//    newY = MAX(statusBarHeight + (CGRectGetHeight(self.bubbleView.bounds) / 2), newY);
+//
+//    CGFloat newX = MIN(self.bubbleView.center.x + translation.x, screenWidth);
+//    newX = MAX((CGRectGetWidth(self.bubbleView.bounds) / 2), newX);
+//
+//    self.bubbleView.center = CGPointMake(newX, newY);
+//    [sender setTranslation:CGPointZero inView:self.bubbleView];
 }
 
 @end
