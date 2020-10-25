@@ -66,7 +66,7 @@
 }
 
 - (IBAction)deviceIdCopyTapped:(id)sender {
-#if !os(tvOS)
+#if !TARGET_OS_TV
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.deviceIdLabel.text;
 #endif
@@ -75,7 +75,7 @@
 }
 
 - (IBAction)userIdCopyTapped:(id)sender {
-#if !os(tvOS)
+#if !TARGET_OS_TV
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.userIdLabel.text;
 #endif
